@@ -57,7 +57,6 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Get('logout')
   async logout(@User() user: PayloadDto): Promise<{ success: boolean }> {
-    console.log('user: ', user);
     return this.authService.logout(user.userId);
   }
 }

@@ -96,7 +96,6 @@ export class AuthService {
 
   async logout(userId: string): Promise<{ success: boolean }> {
     const refresh = await this.refreshTokenModel.findOne({ userId });
-    console.log('refresh: ', refresh);
     await this.refreshTokenModel.findByIdAndDelete(refresh);
 
     return { success: true };
