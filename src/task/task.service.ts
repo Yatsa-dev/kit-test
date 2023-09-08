@@ -6,7 +6,7 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task, TaskDocument } from './schema/task.schema';
 import { ProjectService } from '../project/project.service';
 import { NOT_FOUND } from './task.constants';
-import { GetTasksDto } from './dto/get-orders.dto';
+import { GetTasksDto } from './dto/get-task.dto';
 import { GetTasksFilters } from './types/data.types';
 
 @Injectable()

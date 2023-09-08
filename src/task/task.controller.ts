@@ -13,7 +13,7 @@ import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { GetTasksDto } from './dto/get-orders.dto';
+import { GetTasksDto } from './dto/get-task.dto';
 import { TaskResponse } from './dto/task-response.dto';
 import {
   ApiBearerAuth,

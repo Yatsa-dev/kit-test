@@ -1,7 +1,7 @@
 import { Transform } from 'class-transformer';
 import { IsOptional, IsNumber } from 'class-validator';
 
-export class GetTasksDto {
+export class PaginationDto {
   @IsOptional()
   @IsNumber()
   @Transform(({ value }) => {
@@ -23,8 +23,5 @@ export class GetTasksDto {
   })
   sort?: number;
 
-  from?: Date;
-  to?: Date;
   search?: string;
-  status?: string;
 }

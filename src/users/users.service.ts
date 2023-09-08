@@ -1,4 +1,3 @@
-import { omit } from 'lodash';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -28,8 +27,6 @@ export class UsersService {
   }
 
   async getProfileInfo(userId: string): Promise<UserDataResponse> {
-    const user = await this.usersModel.findById(userId);
-
-    return { ...omit(user.toObject(), ['password', '_id']) };
+    return this.usersModel.findById(userId).select('-password');
   }
 }

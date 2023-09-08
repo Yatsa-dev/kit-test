@@ -7,8 +7,6 @@ export type UserDocument = User & Document;
 export class User {
   _id: string;
 
-  id?: string;
-
   @Prop()
   name: string;
 
@@ -20,5 +18,3 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-
-UserSchema.set('toObject', { virtuals: true });
