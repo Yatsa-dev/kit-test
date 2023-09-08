@@ -1,17 +1,19 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UsersService } from './users.service';
-import { User } from '../decorators/user.decorator';
+import { UserData } from '../decorators/user.decorator';
 import { PayloadDto } from '../auth/dto/payload.dto';
 import {
   ApiBearerAuth,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { UserDataResponse } from './dto/user-response.dto';
+import MongooseClassSerializerInterceptor from '../utils/mongo/mongooseClassSerializer.interceptor';
+import { User } from './schemas/user.schema';
 
 @ApiTags('users')
 @Controller('users')
+@UseInterceptors(MongooseClassSerializerInterceptor(User))
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -22,7 +24,7 @@ export class UsersController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
-  async getProfile(@User() user: PayloadDto): Promise<UserDataResponse> {
+  async getProfile(@UserData() user: PayloadDto): Promise<User> {
     return this.usersService.getProfileInfo(user.userId);
   }
 }

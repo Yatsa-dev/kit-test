@@ -56,7 +56,7 @@ describe('UsersService', () => {
     it('should found user from db by id', async () => {
       const user = await userService.save(mockUser);
 
-      expect(userService.findById(user.id)).resolves.toMatchObject(mockUser);
+      expect(userService.findById(user._id)).resolves.toMatchObject(mockUser);
     });
   });
 
@@ -64,7 +64,7 @@ describe('UsersService', () => {
     it('should found user from db by id and return without password', async () => {
       const user = await userService.save(mockUser);
 
-      expect(userService.getProfileInfo(user.id)).resolves.toMatchObject({
+      expect(userService.getProfileInfo(user._id)).resolves.toMatchObject({
         name: 'Ihor Yatsa',
         email: 'yacaa21@gmail.com',
       });

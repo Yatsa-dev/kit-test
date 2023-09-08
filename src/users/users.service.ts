@@ -3,7 +3,6 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create.dto';
-import { UserDataResponse } from './dto/user-response.dto';
 
 @Injectable()
 export class UsersService {
@@ -26,7 +25,7 @@ export class UsersService {
     return user && user.toObject();
   }
 
-  async getProfileInfo(userId: string): Promise<UserDataResponse> {
-    return this.usersModel.findById(userId).select('-password');
+  async getProfileInfo(userId: string): Promise<User> {
+    return this.usersModel.findById(userId);
   }
 }

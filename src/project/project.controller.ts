@@ -13,7 +13,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { PayloadDto } from '../auth/dto/payload.dto';
-import { User } from '../decorators/user.decorator';
+import { UserData } from '../decorators/user.decorator';
 import { ProjectResponse } from './dto/project-response.dto';
 import {
   ApiBearerAuth,
@@ -36,7 +36,7 @@ export class ProjectController {
   @UseGuards(AuthGuard('jwt'))
   @Post()
   create(
-    @User() user: PayloadDto,
+    @UserData() user: PayloadDto,
     @Body() createProjectDto: CreateProjectDto,
   ): Promise<ProjectResponse> {
     return this.projectService.create(user.userId, createProjectDto);
@@ -49,7 +49,7 @@ export class ProjectController {
   })
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  findAll(@User() user: PayloadDto): Promise<ProjectResponse[]> {
+  findAll(@UserData() user: PayloadDto): Promise<ProjectResponse[]> {
     return this.projectService.findAll(user.userId);
   }
 

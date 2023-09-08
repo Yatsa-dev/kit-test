@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from '../decorators/user.decorator';
+import { UserData } from '../decorators/user.decorator';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { LoginResponseDto } from './dto/loginResponse.dto';
@@ -56,7 +56,7 @@ export class AuthController {
   })
   @UseGuards(AuthGuard('jwt'))
   @Get('logout')
-  async logout(@User() user: PayloadDto): Promise<{ success: boolean }> {
+  async logout(@UserData() user: PayloadDto): Promise<{ success: boolean }> {
     return this.authService.logout(user.userId);
   }
 }
